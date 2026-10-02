@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace monsterCompendium.Models
 {
-    internal class ArmorClass
+    public class ArmorClass
     {
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;

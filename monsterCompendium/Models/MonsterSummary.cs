@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace monsterCompendium.Models
 {
-    internal class MonsterSummary
+    public class MonsterSummary
     {
         [JsonPropertyName("index")]
         public string Index { get; set; } = string.Empty;

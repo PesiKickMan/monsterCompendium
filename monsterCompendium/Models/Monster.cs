@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace monsterCompendium.Models
 {
-    internal class Monster
+    public class Monster
     {
         [JsonPropertyName("index")]
         public string Index { get; set; } = string.Empty;
@@ -15,6 +15,10 @@ namespace monsterCompendium.Models
 
         [JsonPropertyName("image")]
         public string Image { get; set; } = string.Empty;
+
+        [JsonIgnore]
+        public string ImageUrl =>
+            string.IsNullOrEmpty(Image) ? string.Empty : $"https://www.dnd5eapi.co{Image}";
 
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
@@ -29,21 +33,21 @@ namespace monsterCompendium.Models
         public List<ArmorClass> ArmorClass { get; set; } = new();
 
         [JsonPropertyName("strength")]
-        public string Strength { get; set; } = string.Empty;
+        public int Strength { get; set; };
 
         [JsonPropertyName("dexterity")]
-        public string Dexterity { get; set; } = string.Empty;
+        public int Dexterity { get; set; }
 
         [JsonPropertyName("constitution")]
-        public string Constitution { get; set; } = string.Empty;
+        public int Constitution { get; set; }
 
         [JsonPropertyName("intelligence")]
-        public string Intelligence { get; set; } = string.Empty;
+        public int Intelligence { get; set; }
 
         [JsonPropertyName("wisdom")]
-        public string Wisdom { get; set; } = string.Empty;
+        public int Wisdom { get; set; }
 
         [JsonPropertyName("charisma")]
-        public string Charisma { get; set; } = string.Empty;
+        public int Charisma { get; set; }
     }
 }
