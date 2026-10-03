@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="monsterCompendium.Views.MonsterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:monsterCompendium.Models"
+    xmlns:viewmodels="clr-namespace:monsterCompendium.ViewModels"
+    x:DataType="viewmodels:MonstersViewModel"
+    Title="Monsters">
+
+    <Grid Padding="20" RowDefinitions="Auto,*,Auto,Auto" RowSpacing="15">
+
+        <!-- Título -->
+        <Label Grid.Row="0" Text="D&amp;D Monster Compendium" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <!-- Lista de monstruos -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Monsters}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MonsterSummary">
+                    <Border Margin="0,5" Padding="15" StrokeThickness="1">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectMonsterCommand}" CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Indicador de carga -->
+        <ActivityIndicator Grid.Row="2" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" />
+
+        <!-- Controles inferiores -->
+        <VerticalStackLayout Grid.Row="3" Spacing="10">
+            <Label Text="{Binding StatusMessage}" HorizontalTextAlignment="Center" FontSize="14" />
+            <Button Text="Cargar más" Command="{Binding LoadMoreCommand}" />
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

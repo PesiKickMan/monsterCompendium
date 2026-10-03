@@ -33,7 +33,7 @@ namespace monsterCompendium.Models
         public List<ArmorClass> ArmorClass { get; set; } = new();
 
         [JsonPropertyName("strength")]
-        public int Strength { get; set; };
+        public int Strength { get; set; }
 
         [JsonPropertyName("dexterity")]
         public int Dexterity { get; set; }
