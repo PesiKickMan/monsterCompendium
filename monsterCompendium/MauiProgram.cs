@@ -26,9 +26,11 @@ namespace monsterCompendium
 
             // ViewModels
             builder.Services.AddTransient<MonstersViewModel>();
+            builder.Services.AddTransient<MonsterDetailViewModel>();
 
             // Views
             builder.Services.AddTransient<MonsterPage>();
+            builder.Services.AddTransient<MonsterDetailPage>();
 
             // Shell
             builder.Services.AddSingleton<AppShell>();

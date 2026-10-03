@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="monsterCompendium.Views.MonsterDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:monsterCompendium.ViewModels"
+    x:DataType="viewmodels:MonsterDetailViewModel"
+    Title="Monster Detail">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!-- Indicador de carga -->
+            <ActivityIndicator
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                HorizontalOptions="Center" />
+
+            <!-- Mensaje de estado -->
+            <Label
+                Text="{Binding StatusMessage}"
+                HorizontalTextAlignment="Center"
+                FontSize="14" />
+
+            <!-- Imagen del monstruo -->
+            <Image
+                Source="{Binding SelectedMonster.ImageUrl}"
+                HeightRequest="250"
+                Aspect="AspectFit"
+                HorizontalOptions="Fill" />
+
+            <!-- Nombre -->
+            <Label
+                Text="{Binding SelectedMonster.Name}"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Tipo y tamaño -->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="10">
+
+                <Label
+                    Text="{Binding SelectedMonster.Type}"
+                    FontSize="16" />
+
+                <Label
+                    Text="•"
+                    FontSize="16" />
+
+                <Label
+                    Text="{Binding SelectedMonster.Size}"
+                    FontSize="16" />
+
+            </HorizontalStackLayout>
+
+            <!-- Información principal -->
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="15"
+                RowSpacing="10">
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="15">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="Hit Points"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.HitPoints}"
+                            FontSize="22"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="15">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="Armor Class"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.ArmorClass[0].Value}"
+                            FontSize="22"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </Grid>
+
+            <!-- Título de estadísticas -->
+            <Label
+                Text="Ability Scores"
+                FontSize="20"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center" />
+
+            <!-- Estadísticas -->
+            <Grid
+                ColumnDefinitions="*,*,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="10"
+                RowSpacing="10">
+
+                <!-- Strength -->
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="STR"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Strength}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Dexterity -->
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="DEX"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Dexterity}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Constitution -->
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="CON"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Constitution}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Intelligence -->
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="INT"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Intelligence}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Wisdom -->
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="WIS"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Wisdom}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!-- Charisma -->
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Padding="10">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="CHA"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SelectedMonster.Charisma}"
+                            FontSize="20"
+                            HorizontalTextAlignment="Center" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </Grid>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

@@ -5,6 +5,8 @@
         public AppShell()
         {
             InitializeComponent();
+            //Registrar rutas para las páginas de detalles de monstruos
+            Routing.RegisterRoute("monsterdetails", typeof(Views.MonsterDetailPage));
         }
     }
 }
