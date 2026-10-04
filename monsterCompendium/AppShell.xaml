@@ -7,9 +7,20 @@
     xmlns:views="clr-namespace:monsterCompendium.Views"
     Title="monsterCompendium">
 
-    <ShellContent
-        Title="Monsters"
-        ContentTemplate="{DataTemplate views:MonsterPage}"
-        Route="monsters" />
+    <TabBar>
+
+        <!-- Lista general de monstruos -->
+        <ShellContent
+            Title="Monstruos"
+            Route="monsters"
+            ContentTemplate="{DataTemplate views:MonsterPage}" />
+
+        <!-- Monstruos favoritos -->
+        <ShellContent
+            Title="Favoritos"
+            Route="favorites"
+            ContentTemplate="{DataTemplate views:FavoritePage}" />
+
+    </TabBar>
 
 </Shell>

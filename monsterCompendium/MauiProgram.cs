@@ -23,14 +23,18 @@ namespace monsterCompendium
 
             // Services
             builder.Services.AddSingleton<IMonsterApiService, MonsterApiService>();
+            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
 
             // ViewModels
             builder.Services.AddTransient<MonstersViewModel>();
             builder.Services.AddTransient<MonsterDetailViewModel>();
+            builder.Services.AddTransient<FavoritesViewModel>();
 
             // Views
             builder.Services.AddTransient<MonsterPage>();
             builder.Services.AddTransient<MonsterDetailPage>();
+            builder.Services.AddTransient<FavoritePage>();
 
             // Shell
             builder.Services.AddSingleton<AppShell>();

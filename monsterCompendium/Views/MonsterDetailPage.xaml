@@ -58,6 +58,14 @@
                     FontSize="16" />
 
             </HorizontalStackLayout>
+            
+            <!-- Favoritos -->
+            <Button
+                Text="{Binding FavoriteButtonText}"
+                Command="{Binding ToggleFavoriteCommand}"
+                BackgroundColor="LightGray"
+                TextColor="Black"
+                HorizontalOptions="Center" />
 
             <!-- Información principal -->
             <Grid
