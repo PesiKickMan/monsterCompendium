@@ -34,7 +34,7 @@
         <!-- Controles inferiores -->
         <VerticalStackLayout Grid.Row="3" Spacing="10">
             <Label Text="{Binding StatusMessage}" HorizontalTextAlignment="Center" FontSize="14" />
-            <Button Text="Cargar más" Command="{Binding LoadMoreCommand}" />
+            <Button Text="{Binding LoadButtonText}" Command="{Binding LoadMoreCommand}" />
         </VerticalStackLayout>
 
     </Grid>

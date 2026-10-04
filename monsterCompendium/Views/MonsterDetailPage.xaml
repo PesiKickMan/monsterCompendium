@@ -263,6 +263,12 @@
                 </Border>
 
             </Grid>
+            
+            <Button
+                Text="Volver"
+                Command="{Binding GoBackCommand}"
+                HorizontalOptions="Center"
+                Margin="0,20,0,0" />
 
         </VerticalStackLayout>
 

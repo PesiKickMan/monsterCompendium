@@ -22,6 +22,9 @@ namespace monsterCompendium.ViewModels
 
         public ObservableCollection<MonsterSummary> Monsters { get; } = new();
 
+        [ObservableProperty]
+        private  string loadButtonText = "Cargar monstruos";
+
         public MonstersViewModel(IMonsterApiService monsterApiService)
         {
             _monsterApiService = monsterApiService;
@@ -57,6 +60,8 @@ namespace monsterCompendium.ViewModels
                 }
 
                 _currentCount += monstersToAdd.Count;
+                
+                LoadButtonText = "Cargar más monstruos";
 
                 StatusMessage =
                 $"Mostrando {_currentCount} de {_allMonsters.Count} monstruos.";

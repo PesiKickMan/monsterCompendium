@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using monsterCompendium.Models;
 using monsterCompendium.Services;
 using Microsoft.Maui.Controls;
@@ -48,7 +49,7 @@ namespace monsterCompendium.ViewModels
                     return;
                 }
 
-                //StatusMessage = "Se cargaron los detalles del monstruo correctamente.";
+                StatusMessage = "Se cargaron los detalles del monstruo correctamente.";
             }
             catch (HttpRequestException ex)
             when (ex.StatusCode == HttpStatusCode.NotFound)
@@ -75,6 +76,12 @@ namespace monsterCompendium.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        private async Task GoBackAsync()
+        {
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
