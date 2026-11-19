@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="monsterCompendium.Tests/monsterCompendium.Tests.csproj" Id="c8dde37b-5a67-4f63-be20-5659c3ba9a2b" />
   <Project Path="monsterCompendium/monsterCompendium.csproj" />
 </Solution>
