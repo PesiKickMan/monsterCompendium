@@ -75,6 +75,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="monsterCompendium.Tests" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Views\FavoritePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

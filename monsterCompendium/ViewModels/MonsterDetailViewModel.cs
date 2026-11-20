@@ -38,7 +38,7 @@ namespace monsterCompendium.ViewModels
             }
         }
 
-        private async Task LoadMonsterAsync(string? index)
+        internal async Task LoadMonsterAsync(string? index)
         {
             if (string.IsNullOrWhiteSpace(index) || IsBusy)
                 return;
