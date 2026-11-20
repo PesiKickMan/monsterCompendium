@@ -29,7 +29,7 @@ jobs:
         run: dotnet restore
 
       - name: Build proyecto principal
-        run: dotnet build monsterCompendium/monsterCompendium.csproj -f net10.0 --no-restore --configuration Release
+        run: dotnet build monsterCompendium/monsterCompendium.csproj --no-restore --configuration Release
 
       - name: Build proyecto de tests
         run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore --configuration Release
