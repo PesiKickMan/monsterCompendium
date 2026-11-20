@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Instalar workload de MAUI
+        run: dotnet workload install maui
+
+      - name: Restore
+        run: dotnet restore monsterCompendium.Tests/monsterCompendium.Tests.csproj
+
+      - name: Build
+        run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore
+
+      - name: Test
+        run: dotnet test monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-build --verbosity normal
