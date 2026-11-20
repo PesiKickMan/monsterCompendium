@@ -13,6 +13,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
@@ -33,10 +37,10 @@ jobs:
         run: dotnet restore
 
       - name: Build proyecto principal
-        run: dotnet build monsterCompendium/monsterCompendium.csproj --no-restore --configuration Release
+        run: dotnet build monsterCompendium/monsterCompendium.csproj --no-restore --configuration ${{ matrix.configuration }}
 
       - name: Build proyecto de tests
-        run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore --configuration Release
+        run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore --configuration ${{ matrix.configuration }}
 
       - name: Test
-        run: dotnet test monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-build --verbosity normal --configuration Release
+        run: dotnet test monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-build --verbosity normal --configuration ${{ matrix.configuration }}
