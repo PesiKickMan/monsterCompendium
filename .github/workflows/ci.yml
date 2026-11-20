@@ -12,21 +12,25 @@ jobs:
 
     steps:
       - name: Checkout del repositorio
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4
 
       - name: Instalar .NET 10
-        uses: actions/setup-dotnet@v4.0.0
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+          cache: true
 
       - name: Instalar workload de MAUI
-        run: dotnet workload install maui
+        run: dotnet workload install maui --skip-manifest-update
 
       - name: Restore
-        run: dotnet restore monsterCompendium.Tests/monsterCompendium.Tests.csproj
+        run: dotnet restore
 
-      - name: Build
-        run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore
+      - name: Build proyecto principal
+        run: dotnet build monsterCompendium/monsterCompendium.csproj --no-restore --configuration Release
+
+      - name: Build proyecto de tests
+        run: dotnet build monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-build --verbosity normal
+        run: dotnet test monsterCompendium.Tests/monsterCompendium.Tests.csproj --no-build --verbosity normal --configuration Release
