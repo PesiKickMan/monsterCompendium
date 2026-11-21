@@ -38,6 +38,7 @@ namespace monsterCompendium
             builder.Services.AddTransient<MonsterPage>();
             builder.Services.AddTransient<MonsterDetailPage>();
             builder.Services.AddTransient<FavoritePage>();
+            builder.Services.AddTransient<DiceRollerPage>();
 
             // Shell
             builder.Services.AddSingleton<AppShell>();

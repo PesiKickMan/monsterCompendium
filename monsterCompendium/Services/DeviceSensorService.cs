@@ -42,16 +42,18 @@ namespace monsterCompendium.Services
 
         public void Vibrate()
         {
+            if (!Vibration.Default.IsSupported)
+                return;
+
             Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(150));
         }
 
-        private void OnShakeDetected(
-            object? sender,
-            EventArgs e)
+        private void OnShakeDetected(object? sender, EventArgs e)
         {
-            ShakeDetected?.Invoke(
-                this,
-                EventArgs.Empty);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                ShakeDetected?.Invoke(this, EventArgs.Empty);
+            });
         }
     }
 }

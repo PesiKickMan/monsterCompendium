@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="monsterCompendium.Views.DiceRollerPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:monsterCompendium.ViewModels"
+    x:DataType="viewModels:DiceRollerViewModel"
+    Title="D20">
+
+    <VerticalStackLayout
+        Padding="30"
+        Spacing="25"
+        VerticalOptions="Center">
+
+        <!-- Título -->
+        <Label
+            Text="Tirador de D20"
+            FontSize="28"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
+
+        <!-- Instrucciones -->
+        <Label
+            Text="Tirá el dado usando el botón"
+            FontSize="16"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center" />
+
+        <Border
+            Padding="30"
+            HorizontalOptions="Center">
+
+            <Label
+                Text="{Binding Result}"
+                FontSize="72"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+        </Border>
+
+        <!-- Botón de tirada -->
+        <Button
+            Text="Tirar D20"
+            Command="{Binding RollCommand}"
+            FontSize="18"
+            HorizontalOptions="Fill" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

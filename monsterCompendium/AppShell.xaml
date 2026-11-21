@@ -21,6 +21,12 @@
             Route="favorites"
             ContentTemplate="{DataTemplate views:FavoritePage}" />
 
+        <!-- Tirador de D20 -->
+        <ShellContent
+            Title="D20"
+            ContentTemplate="{DataTemplate views:DiceRollerPage}"
+            Route="DiceRollerPage" />
+
     </TabBar>
 
 </Shell>

@@ -242,18 +242,6 @@
         "contentHash": "Ev2ytaXiOlWZ4b3R67GZBsemTINslLD1DCJr2xiacpn4tbapu0Q4dHEzSvZSMnVWeE5nlObU3VZN2p81q3XOYQ=="
       }
     },
-    "net10.0/android-x64": {
-      "SourceGear.sqlite3": {
-        "type": "Transitive",
-        "resolved": "3.53.3",
-        "contentHash": "PaDT7JwQ00HmXZT1xSGSC0c24A5lVpJYHMrXBuJATdpB2t0nf4Kq9HyPaZhxVW0elPq4XI1s5BLh7qLuObmzFA=="
-      },
-      "SQLitePCLRaw.lib.e_sqlite3": {
-        "type": "Transitive",
-        "resolved": "2.1.11",
-        "contentHash": "Ev2ytaXiOlWZ4b3R67GZBsemTINslLD1DCJr2xiacpn4tbapu0Q4dHEzSvZSMnVWeE5nlObU3VZN2p81q3XOYQ=="
-      }
-    },
     "net10.0/iossimulator-x64": {
       "SourceGear.sqlite3": {
         "type": "Transitive",
@@ -1580,13 +1568,6 @@
         "contentHash": "PaDT7JwQ00HmXZT1xSGSC0c24A5lVpJYHMrXBuJATdpB2t0nf4Kq9HyPaZhxVW0elPq4XI1s5BLh7qLuObmzFA=="
       }
     },
-    "net10.0-android36.0/android-x64": {
-      "SourceGear.sqlite3": {
-        "type": "Transitive",
-        "resolved": "3.53.3",
-        "contentHash": "PaDT7JwQ00HmXZT1xSGSC0c24A5lVpJYHMrXBuJATdpB2t0nf4Kq9HyPaZhxVW0elPq4XI1s5BLh7qLuObmzFA=="
-      }
-    },
     "net10.0-android36.0/iossimulator-x64": {
       "SourceGear.sqlite3": {
         "type": "Transitive",
@@ -1838,7 +1819,6 @@
       }
     },
     "net10.0-ios26.5/android-arm64": {},
-    "net10.0-ios26.5/android-x64": {},
     "net10.0-ios26.5/iossimulator-x64": {},
     "net10.0-ios26.5/maccatalyst-x64": {},
     "net10.0-ios26.5/win-x64": {},
@@ -2078,18 +2058,6 @@
       }
     },
     "net10.0-maccatalyst26.5/android-arm64": {
-      "SourceGear.sqlite3": {
-        "type": "Transitive",
-        "resolved": "3.53.3",
-        "contentHash": "PaDT7JwQ00HmXZT1xSGSC0c24A5lVpJYHMrXBuJATdpB2t0nf4Kq9HyPaZhxVW0elPq4XI1s5BLh7qLuObmzFA=="
-      },
-      "SQLitePCLRaw.lib.e_sqlite3": {
-        "type": "Transitive",
-        "resolved": "2.1.11",
-        "contentHash": "Ev2ytaXiOlWZ4b3R67GZBsemTINslLD1DCJr2xiacpn4tbapu0Q4dHEzSvZSMnVWeE5nlObU3VZN2p81q3XOYQ=="
-      }
-    },
-    "net10.0-maccatalyst26.5/android-x64": {
       "SourceGear.sqlite3": {
         "type": "Transitive",
         "resolved": "3.53.3",
@@ -2518,40 +2486,6 @@
       }
     },
     "net10.0-windows10.0.19041/android-arm64": {
-      "Microsoft.Graphics.Win2D": {
-        "type": "Transitive",
-        "resolved": "1.3.2",
-        "contentHash": "xAv4+Xj8wePW1innIUSXebX6UHMGDzOxwKPwYNUNY7mBrsRL/hPFEtuPLpBSxc3iBnuaCogPDCDeN7T4b1xV0Q==",
-        "dependencies": {
-          "Microsoft.WindowsAppSDK": "1.6.241114003"
-        }
-      },
-      "Microsoft.Web.WebView2": {
-        "type": "Transitive",
-        "resolved": "1.0.3179.45",
-        "contentHash": "3pokSH5CnN0G6rGhGFo1y87inxYhNxBQ2Vdf0wlvBj99KHxQJormjDACmqRnFeUsmuNFIhWwfAL1ztq7wD5qRA=="
-      },
-      "Microsoft.WindowsAppSDK.Foundation": {
-        "type": "Transitive",
-        "resolved": "1.8.260505001",
-        "contentHash": "41SSoEn3sKKCAVPA/w18zVJwV1C7aDEkPS2f6Zyp19m27tDEmteEp0XS3Ln3b0ElYR4FfPEPvIDbJPSA9vePGw==",
-        "dependencies": {
-          "Microsoft.WindowsAppSDK.Base": "1.8.251216001",
-          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.8.260430001"
-        }
-      },
-      "SourceGear.sqlite3": {
-        "type": "Transitive",
-        "resolved": "3.53.3",
-        "contentHash": "PaDT7JwQ00HmXZT1xSGSC0c24A5lVpJYHMrXBuJATdpB2t0nf4Kq9HyPaZhxVW0elPq4XI1s5BLh7qLuObmzFA=="
-      },
-      "SQLitePCLRaw.lib.e_sqlite3": {
-        "type": "Transitive",
-        "resolved": "2.1.11",
-        "contentHash": "Ev2ytaXiOlWZ4b3R67GZBsemTINslLD1DCJr2xiacpn4tbapu0Q4dHEzSvZSMnVWeE5nlObU3VZN2p81q3XOYQ=="
-      }
-    },
-    "net10.0-windows10.0.19041/android-x64": {
       "Microsoft.Graphics.Win2D": {
         "type": "Transitive",
         "resolved": "1.3.2",

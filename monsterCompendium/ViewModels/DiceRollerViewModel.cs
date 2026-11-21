@@ -21,8 +21,6 @@ namespace monsterCompendium.ViewModels
         {
             _diceService = diceService;
             _deviceSensorService = deviceSensorService;
-
-            _deviceSensorService.ShakeDetected += OnShakeDetected;
         }
 
         [RelayCommand]
@@ -35,11 +33,16 @@ namespace monsterCompendium.ViewModels
 
         public void StartListening()
         {
+            _deviceSensorService.ShakeDetected -= OnShakeDetected;
+            _deviceSensorService.ShakeDetected += OnShakeDetected;
+
             _deviceSensorService.StartShakeDetection();
         }
 
         public void StopListening()
         {
+            _deviceSensorService.ShakeDetected -= OnShakeDetected;
+
             _deviceSensorService.StopShakeDetection();
         }
 
