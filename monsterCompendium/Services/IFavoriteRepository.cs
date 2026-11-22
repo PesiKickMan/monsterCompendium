@@ -14,5 +14,7 @@ namespace monsterCompendium.Services
         Task AddAsync(string index);
 
         Task RemoveAsync(string index);
+
+        Task UpdatePhotoAsync(string index, string photoPath);
     }
 }

@@ -64,5 +64,21 @@ namespace monsterCompendium.Services
 
             await database.DeleteAsync(favorite);
         }
+
+        public async Task UpdatePhotoAsync(string index, string photoPath)
+        {
+            var database = await _databaseService.GetConnectionAsync();
+
+            var favorite = await database
+                .Table<FavoriteMonster>()
+                .FirstOrDefaultAsync(f => f.Index == index);
+
+            if (favorite is null)
+                return;
+
+            favorite.PhotoPath = photoPath;
+
+            await database.UpdateAsync(favorite);
+        }
     }
 }

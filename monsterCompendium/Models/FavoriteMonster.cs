@@ -13,5 +13,7 @@ namespace monsterCompendium.Models
 
         [Indexed]
         public string Index { get; set; } = string.Empty;
+
+        public string? PhotoPath { get; set; }
     }
 }

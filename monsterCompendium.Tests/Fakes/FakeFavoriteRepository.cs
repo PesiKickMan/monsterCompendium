@@ -50,5 +50,18 @@ namespace monsterCompendium.Tests.Fakes
 
             return Task.CompletedTask;
         }
+
+        public Task UpdatePhotoAsync(string index, string photoPath)
+        {
+            var favorite = _favorites.FirstOrDefault(
+                f => f.Index == index);
+
+            if (favorite is not null)
+            {
+                favorite.PhotoPath = photoPath;
+            }
+
+            return Task.CompletedTask;
+        }
     }
 }

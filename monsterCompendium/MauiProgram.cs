@@ -27,6 +27,7 @@ namespace monsterCompendium
             builder.Services.AddSingleton<IFavoriteRepository, FavoriteRepository>();
             builder.Services.AddSingleton<IDiceService, DiceService>();
             builder.Services.AddSingleton<IDeviceSensorService, DeviceSensorService>();
+            builder.Services.AddSingleton<IPhotoService, PhotoService>();
 
             // ViewModels
             builder.Services.AddTransient<MonstersViewModel>();

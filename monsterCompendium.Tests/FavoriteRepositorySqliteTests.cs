@@ -124,5 +124,26 @@ namespace monsterCompendium.Tests
 
             Assert.Empty(favorites);
         }
+
+        [Fact]
+        public async Task UpdatePhotoAsync_FavoritoExistente_PersistePhotoPathEnSQLite()
+        {
+            // Arrange
+            await _repository.AddAsync("goblin");
+
+            string photoPath =
+                "/data/user/0/app/files/goblin.jpg";
+
+            // Act
+            await _repository.UpdatePhotoAsync("goblin", photoPath);
+
+            // Assert
+            var favorites = await _repository.GetAllAsync();
+
+            var goblin =
+                favorites.Single(f => f.Index == "goblin");
+
+            Assert.Equal(photoPath, goblin.PhotoPath);
+        }
     }
 }
