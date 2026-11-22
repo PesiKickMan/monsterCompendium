@@ -1,7 +1,9 @@
-﻿using System;
+﻿using monsterCompendium.Models;
+using monsterCompendium.Tests.Fakes;
+using monsterCompendium.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using monsterCompendium.Tests.Fakes;
 
 namespace monsterCompendium.Tests
 {
@@ -91,6 +93,136 @@ namespace monsterCompendium.Tests
             Assert.Contains(favorites, favorite => favorite.Index == "goblin");
             Assert.Contains(favorites, favorite => favorite.Index == "aboleth");
             Assert.Contains(favorites, favorite => favorite.Index == "lich");
+        }
+
+        [Fact]
+        public async Task AddPhotoAsync_FotoCapturada_ActualizaPhotoPath()
+        {
+            // Arrange
+            var favoriteRepository = new FakeFavoriteRepository();
+
+            await favoriteRepository.AddAsync("goblin");
+
+            var monsterApiService = new StubMonsterApiService();
+
+            var photoService =
+                new FakePhotoService
+                {
+                    PhotoPathToReturn =
+                        "/fake/photos/goblin.jpg"
+                };
+
+            var viewModel =
+                new FavoritesViewModel(
+                    favoriteRepository,
+                    monsterApiService,
+                    photoService);
+
+            var monster = new Monster
+            {
+                Index = "goblin",
+                Name = "Goblin"
+            };
+
+            var favorite = new FavoriteItem(monster, null);
+
+            // Act
+            await viewModel.AddPhotoCommand.ExecuteAsync(favorite);
+
+            // Assert
+            Assert.Equal("/fake/photos/goblin.jpg", favorite.PhotoPath);
+
+            Assert.Equal(1, photoService.CaptureCallCount);
+
+            Assert.Equal("goblin", photoService.LastMonsterIndex);
+        }
+
+        [Fact]
+        public async Task AddPhotoAsync_SinFoto_NoActualizaPhotoPath()
+        {
+            // Arrange
+            var favoriteRepository = new FakeFavoriteRepository();
+
+            await favoriteRepository.AddAsync("goblin");
+
+            var monsterApiService = new StubMonsterApiService();
+
+            var photoService =
+                new FakePhotoService
+                {
+                    PhotoPathToReturn = null
+                };
+
+            var viewModel =
+                new FavoritesViewModel(
+                    favoriteRepository,
+                    monsterApiService,
+                    photoService);
+
+            var monster = new Monster
+            {
+                Index = "goblin",
+                Name = "Goblin"
+            };
+
+            var favorite =new FavoriteItem(monster, null);
+
+            // Act
+            await viewModel.AddPhotoCommand.ExecuteAsync(favorite);
+
+            // Assert
+            Assert.Null(favorite.PhotoPath);
+
+            Assert.Equal(1, photoService.CaptureCallCount);
+
+            Assert.Equal("No se agregó ninguna foto.", viewModel.StatusMessage);
+        }
+
+        [Fact]
+        public async Task AddPhotoAsync_FotoExistente_ReemplazaPhotoPath()
+        {
+            // Arrange
+            var favoriteRepository = new FakeFavoriteRepository();
+
+            await favoriteRepository.AddAsync("goblin");
+
+            await favoriteRepository.UpdatePhotoAsync("goblin", "/fake/photos/old-goblin.jpg");
+
+            var monsterApiService = new StubMonsterApiService();
+
+            var photoService =
+                new FakePhotoService
+                {
+                    PhotoPathToReturn =
+                        "/fake/photos/goblin.jpg"
+                };
+
+            var viewModel =
+                new FavoritesViewModel(
+                    favoriteRepository,
+                    monsterApiService,
+                    photoService);
+
+            var monster = new Monster
+            {
+                Index = "goblin",
+                Name = "Goblin"
+            };
+
+            var favorite = new FavoriteItem(monster, "/fake/photos/old-goblin.jpg");
+
+            // Act
+            await viewModel.AddPhotoCommand.ExecuteAsync(favorite);
+
+            // Assert
+            Assert.Equal("/fake/photos/goblin.jpg", favorite.PhotoPath);
+
+            var savedFavorites =await favoriteRepository.GetAllAsync();
+
+            var savedGoblin =
+                savedFavorites.Single(f => f.Index == "goblin");
+
+            Assert.Equal("/fake/photos/goblin.jpg", savedGoblin.PhotoPath);
         }
     }
 }

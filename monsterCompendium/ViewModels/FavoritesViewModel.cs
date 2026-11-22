@@ -13,15 +13,18 @@ namespace monsterCompendium.ViewModels
     {
         private readonly IFavoriteRepository _favoriteRepository;
         private readonly IMonsterApiService _monsterApiService;
+        private readonly IPhotoService _photoService;
 
-        public ObservableCollection<Monster> Favorites { get; } = new();
+        public ObservableCollection<FavoriteItem> Favorites { get; } = new();
 
         public FavoritesViewModel(
             IFavoriteRepository favoriteRepository,
-            IMonsterApiService monsterApiService)
+            IMonsterApiService monsterApiService,
+            IPhotoService photoService)
         {
             _favoriteRepository = favoriteRepository;
             _monsterApiService = monsterApiService;
+            _photoService = photoService;
         }
 
         [RelayCommand]
@@ -51,11 +54,11 @@ namespace monsterCompendium.ViewModels
 
                 foreach (var favorite in savedFavorites)
                 {
-                    var monster = await _monsterApiService.GetMonsterAsync(favorite.Index);
+                    var monster =await _monsterApiService.GetMonsterAsync(favorite.Index);
 
                     if (monster is not null)
                     {
-                        Favorites.Add(monster);
+                        Favorites.Add(new FavoriteItem(monster, favorite.PhotoPath));
                     }
                 }
 
@@ -91,16 +94,17 @@ namespace monsterCompendium.ViewModels
         }
 
         [RelayCommand]
-        private async Task RemoveFavoriteAsync(Monster monster)
+        private async Task RemoveFavoriteAsync(
+            FavoriteItem favorite)
         {
-            if (monster is null)
+            if (favorite is null)
                 return;
 
             try
             {
-                await _favoriteRepository.RemoveAsync(monster.Index);
+                await _favoriteRepository.RemoveAsync(favorite.Monster.Index);
 
-                Favorites.Remove(monster);
+                Favorites.Remove(favorite);
 
                 if (Favorites.Count == 0)
                 {
@@ -121,12 +125,44 @@ namespace monsterCompendium.ViewModels
         }
 
         [RelayCommand]
-        private async Task SelectMonsterAsync(Monster monster)
+        private async Task SelectMonsterAsync(FavoriteItem favorite)
         {
-            if (monster is null)
+            if (favorite is null)
                 return;
 
-            await Shell.Current.GoToAsync($"monsterdetails?index={monster.Index}");
+            await Shell.Current.GoToAsync($"monsterdetails?index={favorite.Monster.Index}");
+        }
+
+        [RelayCommand]
+        private async Task AddPhotoAsync(FavoriteItem favorite)
+        {
+            if (favorite is null)
+                return;
+
+            try
+            {
+                string? photoPath =await _photoService.CapturePhotoAsync(favorite.Monster.Index);
+
+                if (string.IsNullOrWhiteSpace(photoPath))
+                {
+                    StatusMessage =
+                        "No se agregó ninguna foto.";
+
+                    return;
+                }
+
+                await _favoriteRepository.UpdatePhotoAsync(favorite.Monster.Index, photoPath);
+
+                favorite.PhotoPath = photoPath;
+
+                StatusMessage =
+                    $"Foto actualizada para {favorite.Monster.Name}.";
+            }
+            catch (Exception)
+            {
+                StatusMessage =
+                    "Ocurrió un error al agregar la foto.";
+            }
         }
     }
 }

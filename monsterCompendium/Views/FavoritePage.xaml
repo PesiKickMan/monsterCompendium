@@ -22,7 +22,7 @@
             FontAttributes="Bold"
             HorizontalTextAlignment="Center" />
 
-        <!-- Estado de carga -->
+        <!-- Estado -->
         <VerticalStackLayout
             Grid.Row="1"
             Spacing="5">
@@ -39,7 +39,7 @@
 
         </VerticalStackLayout>
 
-        <!-- Lista de favoritos -->
+        <!-- Lista -->
         <CollectionView
             Grid.Row="2"
             ItemsSource="{Binding Favorites}"
@@ -47,74 +47,137 @@
 
             <CollectionView.ItemTemplate>
 
-                <DataTemplate x:DataType="models:Monster">
+                <DataTemplate x:DataType="models:FavoriteItem">
 
                     <Border
                         Margin="0,5"
                         Padding="10"
                         StrokeThickness="1">
 
-                        <!-- Tocar la tarjeta abre el detalle -->
-                        <Border.GestureRecognizers>
-
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
-                                                  Path=SelectMonsterCommand}"
-                                CommandParameter="{Binding .}" />
-
-                        </Border.GestureRecognizers>
-
                         <Grid
-                            ColumnDefinitions="80,*,Auto"
-                            ColumnSpacing="15">
+                            RowDefinitions="Auto,Auto"
+                            RowSpacing="10">
 
-                            <!-- Imagen -->
-                            <Image
-                                Grid.Column="0"
-                                Source="{Binding ImageUrl}"
-                                HeightRequest="70"
-                                WidthRequest="70"
-                                Aspect="AspectFit"
-                                VerticalOptions="Center" />
+                            <!-- Información principal -->
+                            <Grid
+                                Grid.Row="0"
+                                ColumnDefinitions="80,*,Auto"
+                                ColumnSpacing="15">
 
-                            <!-- Información -->
-                            <VerticalStackLayout
-                                Grid.Column="1"
-                                VerticalOptions="Center"
-                                Spacing="5">
+                                <!-- Imagen original de la API -->
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Monster.ImageUrl}"
+                                    HeightRequest="70"
+                                    WidthRequest="70"
+                                    Aspect="AspectFit"
+                                    VerticalOptions="Center">
 
-                                <Label
-                                    Text="{Binding Name}"
-                                    FontSize="18"
-                                    FontAttributes="Bold" />
+                                    <Image.GestureRecognizers>
 
-                                <HorizontalStackLayout
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
+                                                              Path=SelectMonsterCommand}"
+                                            CommandParameter="{Binding .}" />
+
+                                    </Image.GestureRecognizers>
+
+                                </Image>
+
+                                <!-- Información -->
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
                                     Spacing="5">
 
                                     <Label
-                                        Text="{Binding Type}"
-                                        FontSize="14" />
+                                        Text="{Binding Monster.Name}"
+                                        FontSize="18"
+                                        FontAttributes="Bold">
+
+                                        <Label.GestureRecognizers>
+
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
+                                                                  Path=SelectMonsterCommand}"
+                                                CommandParameter="{Binding .}" />
+
+                                        </Label.GestureRecognizers>
+
+                                    </Label>
+
+                                    <HorizontalStackLayout
+                                        Spacing="5">
+
+                                        <Label
+                                            Text="{Binding Monster.Type}"
+                                            FontSize="14" />
+
+                                        <Label
+                                            Text="•"
+                                            FontSize="14" />
+
+                                        <Label
+                                            Text="{Binding Monster.Size}"
+                                            FontSize="14" />
+
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+
+                                <!-- Eliminar favorito -->
+                                <Button
+                                    Grid.Column="2"
+                                    Text="Eliminar"
+                                    VerticalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
+                                                      Path=RemoveFavoriteCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                            </Grid>
+
+                            <!-- Foto local + cámara -->
+                            <Grid
+                                Grid.Row="1"
+                                ColumnDefinitions="120,*"
+                                ColumnSpacing="15">
+
+                                <!-- Foto tomada por el usuario -->
+                                <Border
+                                    Grid.Column="0"
+                                    HeightRequest="110"
+                                    WidthRequest="110"
+                                    Padding="2"
+                                    StrokeThickness="1">
+
+                                    <Image
+                                        Source="{Binding PhotoPath}"
+                                        Aspect="AspectFill"
+                                        HeightRequest="105"
+                                        WidthRequest="105" />
+
+                                </Border>
+
+                                <!-- Acción de cámara -->
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Spacing="8">
 
                                     <Label
-                                        Text="•"
+                                        Text="Foto del favorito"
+                                        FontAttributes="Bold"
                                         FontSize="14" />
 
-                                    <Label
-                                        Text="{Binding Size}"
-                                        FontSize="14" />
+                                    <Button
+                                        Text="Agregar / Reemplazar foto"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
+                                                          Path=AddPhotoCommand}"
+                                        CommandParameter="{Binding .}" />
 
-                                </HorizontalStackLayout>
+                                </VerticalStackLayout>
 
-                            </VerticalStackLayout>
-
-                            <!-- Eliminar favorito -->
-                            <Button
-                                Grid.Column="2"
-                                Text="Eliminar"
-                                VerticalOptions="Center"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FavoritesViewModel}},
-                                                  Path=RemoveFavoriteCommand}"
-                                CommandParameter="{Binding .}" />
+                            </Grid>
 
                         </Grid>
 
