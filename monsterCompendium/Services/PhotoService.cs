@@ -52,7 +52,7 @@ namespace monsterCompendium.Services
                 extension = ".jpg";
             }
 
-            string fileName = $"{monsterIndex}{extension}";
+            string fileName = $"{monsterIndex}_{Guid.NewGuid():N}{extension}";
 
             string destinationPath =Path.Combine(photosDirectory, fileName);
 

@@ -158,10 +158,10 @@ namespace monsterCompendium.ViewModels
                 StatusMessage =
                     $"Foto actualizada para {favorite.Monster.Name}.";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 StatusMessage =
-                    "Ocurrió un error al agregar la foto.";
+                    $"Ocurrió un error al agregar la foto: {ex.GetType().FullName} - {ex.Message}";
             }
         }
     }
